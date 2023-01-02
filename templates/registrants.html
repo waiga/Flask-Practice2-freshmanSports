@@ -1,9 +1,28 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <ul>
-    {% for name in registrants %}
-      <li> {{ name }} is registered for {{ registrants[name] }}</li>
-    {% endfor %}
-  </ul>
+  <h1> Registrants</h1>
+  <table>
+    <thead>
+      <tr>
+          <th>Name</th>
+          <th>Sport</th>
+          <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for registrant in register_data %}
+      <tr>
+        <td>{{ registrant[1] }}</td>
+        <td>{{ registrant[2] }}</td>
+        <td>
+          <from action="/deregister" method="post">
+            <input name="number" type="hidden" value="{{ registrant[0] }}"> {{ registrant[0] }}
+            <button type="submit">Deregister</button>
+          </from>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
